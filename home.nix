@@ -79,8 +79,10 @@
   	enable = true;
 	shellAliases = {
 		vi = "nvim";
+		vim = "nvim";
 	};
   };
+  programs.git.enable = true;
   programs.git.userEmail = "snu1v3r@github.com";
   programs.git.userName = "snu1v3r";
 }
