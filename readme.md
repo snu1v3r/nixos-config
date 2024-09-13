@@ -4,6 +4,35 @@ This repo is intended to provide a *Nix-OS* configuration system to setup variou
 ## Inspiration
 This repo is inspired by the setup created by *LibrePhoenix*. His repo can be found [here](https://github.com/librephoenix/nixos-config).
 
+## Installation
+Installation is possible with a few commands. It assumes an already working minimal configuration
+
+First start a *nix-shell* with *Git* enabled:
+
+```
+nix-shell -p git
+```
+
+In that shell clone this repository:
+
+```
+git clone https://github.com/snu1v3r/nixos-config.git
+```
+
+Next change into the new directory:
+
+```
+cd nixos-config
+```
+
+Switch to the new configuration:
+
+```
+sudo nixos-rebuild switch --flake .
+```
+
+
+
 ## Home-Manager
 ### Switching to *Home-Manager*
 To switch to a *Home-Manager* configuration assuming a previously enabled *Flake* setup you can use the following command:
