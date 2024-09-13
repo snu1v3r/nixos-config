@@ -5,7 +5,6 @@
   # manage.
   home.username = "user";
   home.homeDirectory = "/home/user";
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -67,10 +66,21 @@
   #
   #  /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
   #
+  
+
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.bash = {
+  	enable = true;
+	shellAliases = {
+		vi = "nvim";
+	};
+  };
+  programs.git.userEmail = "snu1v3r@github.com";
+  programs.git.userName = "snu1v3r";
 }
