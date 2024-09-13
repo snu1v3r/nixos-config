@@ -90,6 +90,7 @@
   users.users.user = {
     isNormalUser = true;
     description = "user";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
@@ -97,8 +98,14 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = false;
+  programs = { 
+  	firefox = {
+		enable = false;
+		};
+	zsh = {
+		enable = true;
+		};
+	};
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -116,6 +123,8 @@
   #  wget
 #	open-vm-tools
 	neovim
+	brave
+  	kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -150,5 +159,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  fonts.packages = with pkgs; [
+  (nerdfonts.override { fonts = [ "Meslo" ];})
+  ];
 
 }

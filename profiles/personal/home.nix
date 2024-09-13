@@ -88,6 +88,9 @@
 		vim = "nvim";
 	};
   };
+  programs.kitty = {
+	enable = true;
+  };
   programs.git.enable = true;
   programs.git.userEmail = "snu1v3r@github.com";
   programs.git.userName = "snu1v3r";
