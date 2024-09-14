@@ -20,11 +20,12 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   imports = [
-		../../user/shell/sh.nix
+		../../user/shell/zshell.nix
 		../../user/shell/cli-collection.nix
 	];
 
-  home.packages = [
+  home.packages = with pkgs; [
+  	mc
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -56,6 +57,9 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  	".config/bat".source = ../../user/apps/bat;
+	".local/share/mc/skins".source = ../../user/apps/mc/skins;
+  	".config/mc".source = ../../user/apps/mc;
   };
 
   # Home Manager can also manage your environment variables through
@@ -89,6 +93,8 @@
 	};
   };
   programs.kitty = {
+	font.name = "MesloLGS Nerd Font";
+	theme = "Catppuccin-Mocha";
 	enable = true;
   };
   programs.git.enable = true;

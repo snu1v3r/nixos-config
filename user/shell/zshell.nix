@@ -20,9 +20,5 @@ in
 			source ~/nixos-config/dotfiles/p10k.zsh
 			'';
 		};
-	home.packages = with pkgs; [
-		bat
-	];
-
 
 }

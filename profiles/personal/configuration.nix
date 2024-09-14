@@ -124,7 +124,6 @@
 #	open-vm-tools
 	neovim
 	brave
-  	kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
