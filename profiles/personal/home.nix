@@ -22,6 +22,8 @@
   imports = [
 		../../user/shell/zshell.nix
 		../../user/shell/cli-collection.nix
+		../../user/apps/tmux/tmux.nix
+		../../user/apps/nvim/nvim.nix
 	];
 
   home.packages = with pkgs; [
