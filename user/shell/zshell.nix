@@ -3,6 +3,8 @@ let
 	myAliases = {
 		cat = "bat";
 		vi = "nvim";
+    mc = "mc --nosubshell";
+    saveclip = "xclip -selection clipboard -t image/png -o > ";
 	};
 in
 {

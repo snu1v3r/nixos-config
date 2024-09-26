@@ -24,26 +24,16 @@
 		../../user/shell/cli-collection.nix
 		../../user/apps/tmux/tmux.nix
 		../../user/apps/nvim/nvim.nix
+    ( ./. + "/../../user/apps" + ("/" + userSettings.terminal + "/" + userSettings.terminal) + ".nix") # This selects the terminal emulator
+#    (./.+"../../user/apps/kitty"+("/"+userSettings.terminal)+".nix")
+    ../../user/apps/zoxide/zoxide.nix
+    ../../user/apps/flameshot/flameshot.nix
+    ../../user/apps/plasma/plasma.nix
 	];
+
 
   home.packages = with pkgs; [
   	mc
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -60,32 +50,18 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   	".config/bat".source = ../../user/apps/bat;
-	".local/share/mc/skins".source = ../../user/apps/mc/skins;
+	  ".local/share/mc/skins".source = ../../user/apps/mc/skins;
   	".config/mc".source = ../../user/apps/mc;
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
-  #
   
 
-
+  # This can be used to manage environment variables
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+
 
   programs.bash = {
   	enable = true;
@@ -93,11 +69,6 @@
 		vi = "nvim";
 		vim = "nvim";
 	};
-  };
-  programs.kitty = {
-	font.name = "MesloLGS Nerd Font";
-	theme = "Catppuccin-Mocha";
-	enable = true;
   };
   programs.git.enable = true;
   programs.git.userEmail = "snu1v3r@github.com";

@@ -46,12 +46,15 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+  services.xserver.desktopManager.xterm.enable = false;
+
+  
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.enable = true;
+
   services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.wayland.enable = false;
 
   virtualisation.vmware.guest.enable = true;
   
@@ -61,6 +64,7 @@
     variant = "dvorak";
   };
 
+#  services.picom.enable = true;
   # Configure console keymap
   console.keyMap = "dvorak";
 
@@ -107,6 +111,7 @@
 		};
 	};
 
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
@@ -120,12 +125,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-#	open-vm-tools
-#	open-vm-tools-headless
 	neovim
 	brave
-	xsel
+	xclip
   gcc
   ];
 

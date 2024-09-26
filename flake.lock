@@ -36,10 +36,34 @@
         "type": "indirect"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727020652,
+        "narHash": "sha256-zwTXt1bcf+wycX389ZyJFzUO2gzCb16ButXxiX2iA7Y=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "6f1db348fcb89fd6b0b9c32e279d29ee6b4d1272",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plasma-manager": "plasma-manager"
       }
     }
   },
