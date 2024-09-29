@@ -10,6 +10,7 @@
       ../../system/hardware-configuration.nix
     ];
 
+  #system.nixos.label = "Hello-test";
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";

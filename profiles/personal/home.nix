@@ -34,6 +34,7 @@
 
   home.packages = with pkgs; [
   	mc
+    fzf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -65,12 +66,18 @@
 
   programs.bash = {
   	enable = true;
-	shellAliases = {
-		vi = "nvim";
-		vim = "nvim";
-	};
+	  shellAliases = {
+		  vi = "nvim";
+		  vim = "nvim";
+	  };
   };
-  programs.git.enable = true;
-  programs.git.userEmail = "snu1v3r@github.com";
-  programs.git.userName = "snu1v3r";
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.git = {
+    enable = true;
+    userEmail = "snu1v3r@github.com";
+    userName = "snu1v3r";
+  };
 }
