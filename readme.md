@@ -28,7 +28,7 @@ cd nixos-config
 Switch to the new configuration:
 
 ```
-sudo nixos-rebuild switch --flake .
+sudo nixos-rebuild switch --flake .#system
 ```
 
 
