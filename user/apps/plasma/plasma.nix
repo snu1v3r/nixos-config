@@ -1,3 +1,4 @@
+# https://nix-community.github.io/plasma-manager/options.xhtml
 { pkgs, userSettings, ...}:
 {
   programs.plasma = {
@@ -7,6 +8,15 @@
         family = "MesloLGS Nerd Font";
         pointSize = 10;
       };
+    };
+    kwin.virtualDesktops = {
+      rows = 2;
+      names = [
+      "Desktop 1"
+      "Desktop 2"
+      "Desktop 3"
+      "Desktop 4"
+      ];
     };
     shortcuts = {
       kwin = {
