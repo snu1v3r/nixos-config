@@ -22,9 +22,7 @@
   imports = [
 		../../user/shell/zshell.nix
 		../../user/shell/cli-collection.nix
-		../../user/apps/tmux/tmux.nix
-		../../user/apps/nvim/nvim.nix
-    ( ./. + "/../../user/apps" + ("/" + userSettings.terminal + "/" + userSettings.terminal) + ".nix") # This selects the terminal emulator
+    ( ./. + "/../../user/apps" + ("/" + userSettings.emulator + "/" + userSettings.emulator) + ".nix") # This selects the terminal emulator
 #    (./.+"../../user/apps/kitty"+("/"+userSettings.terminal)+".nix")
     ../../user/apps/zoxide/zoxide.nix
     ../../user/apps/flameshot/flameshot.nix
@@ -35,6 +33,7 @@
   home.packages = with pkgs; [
   	mc
     fzf
+    keepassxc
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

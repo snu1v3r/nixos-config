@@ -97,10 +97,6 @@
     description = "user";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 
   programs = { 
@@ -125,7 +121,6 @@
 	neovim
 	xclip
   gcc
-  keepassxc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

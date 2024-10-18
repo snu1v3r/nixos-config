@@ -35,7 +35,7 @@
 				username = "user";
 				name = "User";
 				dotfilesDir = "~/nixos-config";
-        terminal = "kitty";
+        emulator = "kitty";
 			};
 
 			lib = nixpkgs.lib;
