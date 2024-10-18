@@ -43,6 +43,19 @@
         "Window to Desktop 3" = "Alt+3";
         "Window to Desktop 4" = "Alt+4";
         "Window Maximize" = "Alt+Return";
+        "Window Quick Tile Bottom" = "Alt+Shift+Down";
+        "Window Quick Tile Top" = "Alt+Shift+Up";
+        "Window Quick Tile Left" = "Alt+Shift+Left";
+        "Window Quick Tile Right" = "Alt+Shift+Right";
+        "Window One Screen to the Left" = "Alt+Left";
+        "Window One Screen to the Right" = "Alt+Right";
+        "Switch Window Down" = "Meta+Shift+Down";
+        "Switch Window Up" = "Meta+Shift+Up";
+        "Switch Window Left" = "Meta+Shift+Left";
+        "Switch Window Right" = "Meta+Shift+Right";
+
+
+
       };
       "services/${userSettings.terminal}.desktop"."_launch" = "Meta+Return";
       "org.flameshot.Flameshot.desktop"."Capture" = "Print";
