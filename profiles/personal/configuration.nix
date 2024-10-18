@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edit this configuration file to define what should be installed an
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
@@ -104,12 +104,8 @@
   };
 
   programs = { 
-  	firefox = {
-		enable = false;
-		};
-	zsh = {
-		enable = true;
-		};
+  	firefox.enable = false;
+    zsh.enable = true;
 	};
 
 
@@ -127,9 +123,9 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	neovim
-	brave
 	xclip
   gcc
+  keepassxc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

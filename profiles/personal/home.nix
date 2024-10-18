@@ -80,4 +80,14 @@
     userEmail = "snu1v3r@github.com";
     userName = "snu1v3r";
   };
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    extensions = [
+      { id = "oboonakemofpalcgghocfoadofidjkkk";}
+    ];
+  };
+
 }
+
