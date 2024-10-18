@@ -27,6 +27,7 @@
     ../../user/apps/zoxide/zoxide.nix
     ../../user/apps/flameshot/flameshot.nix
     ../../user/apps/plasma/plasma.nix
+    ../../user/apps/codium/codium.nix
 	];
 
 
