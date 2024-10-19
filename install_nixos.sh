@@ -1,6 +1,31 @@
 #!/bin/sh
 echo "-----"
 
+if command -v git &> /dev/null; then
+  echo "Git is installed, continuing with installation."
+  echo "-----"
+else
+  echo "Git is not installed. Please install Git and try again."
+  echo "Example: nix-shell -p git"
+  exit
+fi
+
+echo "-----"
+
+echo "Ensure In Home Directory"
+cd || exit
+
+echo "Cloning & Entering Repository"
+git clone https://github.com/snu1v3r/nixos-config.git
+cd nixos-config || exit
+git config --global user.name "snu1v3r"
+git config --global user.email "snu1v3r@github.com"
+
+echo "-----"
+
+echo "Ensure In Home Directory"
+cd || exit
+
 read -rp "Special Graphics Driver (none | nvidia ):  [none] " graphics
 if [ -z "$graphics" ]; then
   graphics="none"

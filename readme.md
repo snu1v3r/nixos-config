@@ -4,17 +4,29 @@ This repo is intended to provide a *Nix-OS* configuration system to setup variou
 ## Inspiration
 This repo is inspired by the setup created by *LibrePhoenix*. His repo can be found [here](https://github.com/librephoenix/nixos-config).
 
-## Installation
+## Automatic Installation
 Installation is possible with a few commands. It assumes an already working minimal configuration
 
-First start a *nix-shell* with *Git* enabled:
+First start a *nix-shell* with *Git* and *Curl* enabled:
 
 ```
-nix-shell -p git
+nix-shell -p git curl
 ```
 
-In that shell clone this repository:
+Next execute the installation script (this will clone the repository):
 
+```
+sh <(curl -L https://raw.githubusercontent.com/snu1v3r/nixos-config/main/install_nixos.sh)
+```
+
+## Manual Installation
+First start a *nix-shell* with *Git* and *Curl* enabled:
+
+```
+nix-shell -p git curl
+```
+
+Next clone the repository: 
 ```
 git clone https://github.com/snu1v3r/nixos-config.git
 ```
