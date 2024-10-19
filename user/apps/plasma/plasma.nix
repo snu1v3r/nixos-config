@@ -59,6 +59,7 @@
       };
       "services/${userSettings.emulator}.desktop"."_launch" = "Meta+Return";
       "org.flameshot.Flameshot.desktop"."Capture" = "Print";
+      "services/${userSettings.browser}.desktop"."_launch" = "Meta+B";
     };
 
   };

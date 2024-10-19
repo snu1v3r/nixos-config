@@ -10,7 +10,7 @@
     ../../user/apps/flameshot/flameshot.nix
     ../../user/apps/plasma/plasma.nix
     ../../user/apps/codium/codium.nix
-    ../../user/apps/brave/brave.nix
+    ( ./. + "/../../user/apps" + ("/" + userSettings.browser + "/" + userSettings.browser) + ".nix") # This selects the terminal emulator
 	];
 
 

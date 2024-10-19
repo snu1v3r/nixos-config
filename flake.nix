@@ -41,6 +41,7 @@
 				name = "User";
 				dotfilesDir = "~/nixos-config";
         emulator = "kitty";
+        browser = "brave-browser";
 			};
 
 			lib = nixpkgs.lib;
