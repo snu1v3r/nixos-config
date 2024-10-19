@@ -26,6 +26,15 @@ echo "-----"
 echo "Ensure In Home Directory"
 cd || exit
 
+if [ $# -gt 0 ]
+then
+	SCRIPT_DIR=$1
+else
+	SCRIPT_DIR=~/nixos-config
+fi
+
+cd $SCRIPT_DIR
+
 read -rp "Special Graphics Driver (none | nvidia ):  [none] " graphics
 if [ -z "$graphics" ]; then
   graphics="none"
@@ -54,13 +63,6 @@ else
   echo "-----"
   echo "Configuration modified for 'personal' profile"
   sed -i "/^\s*profile\s*=\s*/s/\"\(.*\)\"/\"$profile\"/" ./flake.nix
-fi
-
-if [ $# -gt 0 ]
-then
-	SCRIPT_DIR=$1
-else
-	SCRIPT_DIR=~/nixos-config
 fi
 
 echo "-----"
