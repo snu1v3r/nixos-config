@@ -17,6 +17,6 @@ in
     services.qemuGuest.enable = true;
     services.spice-vdagentd.enable = true;
     services.spice-webdavd.enable = true;
-    virtualization.vmware.guest.enable = true;
+    virtualisation.vmware.guest.enable = true;
   };
 }
