@@ -29,6 +29,7 @@
 				profile = "personal";
 				timezone = "Europe/Amsterdam";
 				locale = "en_US.UTF-8";
+        nvidia-drivers = false;
 			};
 
 			# --- GLOBAL USER SETTINGS --- #

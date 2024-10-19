@@ -2,13 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, systemSettings, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ../../system/hardware-configuration.nix
+      ../../system/nvidia-drivers.nix
     ];
+
 
   #system.nixos.label = "Hello-test";
   # Bootloader.
@@ -59,6 +61,9 @@
 
   virtualisation.vmware.guest.enable = true;
   
+
+  drivers.nvidia.enable = systemSettings.nvidia-drivers;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -71,7 +76,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
