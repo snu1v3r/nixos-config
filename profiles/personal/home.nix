@@ -1,39 +1,20 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
   
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  # The base configuration for the profile is taken from the `base/home.nix` file.
+  # This file contains all modification that are needed to create a normal daily driver.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   imports = [
-		../../user/shell/zshell.nix
-		../../user/shell/cli-collection.nix
-    ( ./. + "/../../user/apps" + ("/" + userSettings.emulator + "/" + userSettings.emulator) + ".nix") # This selects the terminal emulator
-#    (./.+"../../user/apps/kitty"+("/"+userSettings.terminal)+".nix")
-    ../../user/apps/zoxide/zoxide.nix
+    ../base/home.nix  # This creates the setup that is always needed
     ../../user/apps/flameshot/flameshot.nix
     ../../user/apps/plasma/plasma.nix
     ../../user/apps/codium/codium.nix
+    ../../user/apps/brave/brave.nix
 	];
 
 
   home.packages = with pkgs; [
-  	mc
-    fzf
     keepassxc
   ];
 
@@ -50,9 +31,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  	".config/bat".source = ../../user/apps/bat;
-	  ".local/share/mc/skins".source = ../../user/apps/mc/skins;
-  	".config/mc".source = ../../user/apps/mc;
   };
 
   
@@ -62,32 +40,6 @@
     # EDITOR = "emacs";
   };
 
-
-
-  programs.bash = {
-  	enable = true;
-	  shellAliases = {
-		  vi = "nvim";
-		  vim = "nvim";
-	  };
-  };
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-  programs.git = {
-    enable = true;
-    userEmail = "snu1v3r@github.com";
-    userName = "snu1v3r";
-  };
-
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    extensions = [
-      { id = "oboonakemofpalcgghocfoadofidjkkk";}
-    ];
-  };
 
 }
 
