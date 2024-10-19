@@ -30,6 +30,7 @@
 				timezone = "Europe/Amsterdam";
 				locale = "en_US.UTF-8";
         nvidia-drivers = false;
+        bootloader = "grub";
 			};
 
 			# --- GLOBAL USER SETTINGS --- #

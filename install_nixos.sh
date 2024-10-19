@@ -66,6 +66,22 @@ else
 fi
 
 echo "-----"
+read -rp "Which bootloader was used during installation (grub | systemd): [grub] " bootloader
+if [ -z "$bootloader" ]; then
+  bootloader="grub"
+fi
+
+if [ $bootloader = "systemd" ]; then
+  echo "-----"
+  echo "Configuration modified for 'systemd' bootloader"
+  sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
+else
+  echo "-----"
+  echo "Configuration modified for 'grub' bootloader"
+  sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
+fi
+
+echo "-----"
 echo "Generating Harware Configuration"
 sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-configuration.nix
 

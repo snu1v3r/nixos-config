@@ -14,12 +14,14 @@
 
   #system.nixos.label = "Hello-test";
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+    boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
+    boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
+    boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
+    boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
+    boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootloader == "systemd") then true else false;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  networking.hostName = systemSettings.hostname;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
