@@ -9,10 +9,10 @@
     [ # Include the results of the hardware scan.
       ../../system/hardware-configuration.nix
       ../../system/nvidia-drivers.nix
+      ../../system/vm-guest-services.nix
     ];
 
 
-  #system.nixos.label = "Hello-test";
   # Bootloader.
     boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
     boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
@@ -61,9 +61,8 @@
 
   services.desktopManager.plasma6.enable = true;
 
-  virtualisation.vmware.guest.enable = true;
   
-
+  vm.guest-services.enable = systemSettings.vm-guest;
   drivers.nvidia.enable = systemSettings.nvidia-drivers;
 
   # Configure keymap in X11

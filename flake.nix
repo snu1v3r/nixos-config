@@ -31,6 +31,8 @@
 				locale = "en_US.UTF-8";
         nvidia-drivers = false;
         bootloader = "grub";
+        vm-guest = true;
+
 			};
 
 			# --- GLOBAL USER SETTINGS --- #
