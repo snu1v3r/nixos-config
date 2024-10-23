@@ -43,6 +43,7 @@
         "Window to Desktop 3" = "Alt+3";
         "Window to Desktop 4" = "Alt+4";
         "Window Maximize" = "Alt+Return";
+	"Window Fullscreen" = "Alt+Shift+Return";
         "Window Quick Tile Bottom" = "Alt+Shift+Down";
         "Window Quick Tile Top" = "Alt+Shift+Up";
         "Window Quick Tile Left" = "Alt+Shift+Left";
