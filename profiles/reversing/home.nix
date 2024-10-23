@@ -16,6 +16,9 @@
 
   home.packages = with pkgs; [
     ida-free
+    ghidra
+    radare2
+    pwndbg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

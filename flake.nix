@@ -26,7 +26,7 @@
 			systemSettings = {
 				system = "x86_64-linux"; # system arch
 				hostname = "nixos"; # hostname
-				profile = "personal"; # options are: base, personal, hacking, pentesting, reversing
+				profile = "reversing"; # options are: base, personal, hacking, pentesting, reversing
 				timezone = "Europe/Amsterdam";
 				locale = "en_US.UTF-8";
         nvidia-drivers = false;
