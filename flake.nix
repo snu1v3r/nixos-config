@@ -30,7 +30,7 @@
 				timezone = "Europe/Amsterdam";
 				locale = "en_US.UTF-8";
         nvidia-drivers = false;
-        bootloader = "systemd";
+        bootloader = "grub";
         vm-guest = true;
 
 			};
