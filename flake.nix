@@ -32,6 +32,7 @@
         nvidia-drivers = false;
         bootloader = "grub";
         vm-guest = true;
+        vm-host = false;
 
 			};
 
