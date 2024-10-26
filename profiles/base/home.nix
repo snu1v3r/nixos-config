@@ -29,7 +29,6 @@
 
   home.packages = with pkgs; [
   	mc
-    fzf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

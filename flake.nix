@@ -43,6 +43,7 @@
 				dotfilesDir = "~/nixos-config";
         emulator = "kitty";
         browser = "brave-browser";
+        prompt = "p10k"; # options are: starship, p10k, oh-my-posh
 			};
 
 			lib = nixpkgs.lib;
