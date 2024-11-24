@@ -5,6 +5,7 @@ let
 		vi = "nvim";
     mc = "mc --nosubshell";
     saveclip = "xclip -selection clipboard -t image/png -o > ";
+    lg = "lazygit";
     ls = "eza --icons=always";
     ll = "eza --long --icons=always --git";
     fzf = "fzf --tmux center";

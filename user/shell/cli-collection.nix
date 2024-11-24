@@ -13,6 +13,9 @@ imports = [
     eza = {
       enable = true;
     };
+    lazygit = {
+      enable = true;
+    };
 	};
 
 }
