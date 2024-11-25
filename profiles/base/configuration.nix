@@ -73,7 +73,7 @@
   ];
 
   
-  vm.guest-services.enable = systemSettings.vm-guest;
+  vm.guest-services.type = systemSettings.vm-guest-type;
   drivers.nvidia.enable = systemSettings.nvidia-drivers;
 
   # Configure keymap in X11

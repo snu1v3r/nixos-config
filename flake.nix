@@ -31,7 +31,7 @@
 				locale = "en_US.UTF-8";
         nvidia-drivers = false;
         bootloader = "grub";
-        vm-guest = true;
+        vm-guest-type = "vmware"; # options are: vmware, spice, qemu, none
         vm-host = false;
 
 			};

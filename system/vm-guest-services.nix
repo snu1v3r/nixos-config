@@ -10,13 +10,17 @@ let
 in
 {
   options.vm.guest-services = {
-    enable = mkEnableOption "Enable Virtual Machine Guest Services";
+    type = mkOption {
+      type = types.strMatching "(vmware|qemu|spice|none)";
+      default = "none";
+      description = "Which type of vmware guest additions should be used";
+    };
   };
 
-  config = mkIf cfg.enable {
-    services.qemuGuest.enable = true;
-    services.spice-vdagentd.enable = true;
-    services.spice-webdavd.enable = true;
-    virtualisation.vmware.guest.enable = true;
+  config = {
+    services.qemuGuest.enable = if cfg.type == "qemu" then true else false;
+    services.spice-vdagentd.enable = if cfg.type == "spice" then true else false;
+    services.spice-webdavd.enable = if cfg.type == "spice" then true else false;
+    virtualisation.vmware.guest.enable = if cfg.type == "vmware" then true else false;
   };
 }
