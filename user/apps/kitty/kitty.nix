@@ -3,7 +3,7 @@
 {
   programs.kitty = {
     font.name = "MesloLGS Nerd Font";
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
     enable = true;
     shellIntegration.enableZshIntegration = true;
   };
