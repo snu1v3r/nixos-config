@@ -27,6 +27,9 @@ imports = [
           defaultFgColor = [ "#cdd6f4" ];
           searchingActiveBorderColor = [ "#f9e2af" ];
         };
+        gui.authorColors = {
+          "*" = "#b4befe";
+        };
         os = {
           edit = "/etc/profiles/per-user/user/bin/nvim {{filename}}";
           editAtLine = "/etc/profiles/per-user/user/bin/nvim {{filename}} +{{line}}";
