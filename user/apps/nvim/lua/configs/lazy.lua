@@ -44,4 +44,7 @@ return {
       },
     },
   },
+  {
+    "folke/lazydev.nvim",
+  }
 }

@@ -14,6 +14,25 @@ for _, lsp in ipairs(servers) do
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
+  lspconfig.nixd.setup {
+      cmd = { "nixd" },
+      settings = {
+        nixpkgs = {
+          expr = "import <nixpkgs> { }",
+        },
+        formatting = {
+          command = { "alejandra" },
+        },
+        options = {
+          nixos  = {
+            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix)".nixosConfigurations.system.options',
+          },
+          home_manager = {
+            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix)".nixosConfigurations.system.options',
+          },
+        },
+      },
+  }
 end
 
 -- configuring single server, example: typescript
