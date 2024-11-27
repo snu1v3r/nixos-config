@@ -46,9 +46,8 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  	".config/bat".source = ../../user/apps/bat;
 	  ".local/share/mc/skins".source = ../../user/apps/mc/skins;
-  	".config/mc".source = ../../user/apps/mc;
+   	".config/mc".source = ../../user/apps/mc;
   };
 
   

@@ -10,6 +10,7 @@
       ../../system/hardware-configuration.nix
       ../../system/nvidia-drivers.nix
       ../../system/vm-guest-services.nix
+      ../../user/apps/stylix/stylix.nix
     ];
 
 
@@ -173,9 +174,5 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 
   system.stateVersion = "unstable"; # Did you read the comment?
-
-  fonts.packages = with pkgs; [
-  (nerdfonts.override { fonts = [ "Meslo" ];})
-  ];
 
 }
