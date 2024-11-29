@@ -3,7 +3,8 @@
 {
   programs.kitty = {
     enable = true;
-    shellIntegration.enableZshIntegration = true;
+# This option is disabled. It appears to cause key ghosting
+#    shellIntegration.enableZshIntegration = true;
   };
 
 }
