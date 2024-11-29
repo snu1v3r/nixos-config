@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, ... }:
+{ lib, config, pkgs, userSettings, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -24,6 +24,7 @@
 		../../user/shell/cli-collection.nix
     ( ./. + "/../../user/apps" + ("/" + userSettings.emulator + "/" + userSettings.emulator) + ".nix") # This selects the terminal emulator
     ../../user/apps/zoxide/zoxide.nix
+    ../../user/apps/starship
 	];
 
 
@@ -50,7 +51,7 @@
    	".config/mc".source = ../../user/apps/mc;
   };
 
-  
+
 
   # This can be used to manage environment variables
   home.sessionVariables = {

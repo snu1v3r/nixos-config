@@ -24,17 +24,18 @@ disabled = true
 disabled = true
 
 [directory]
+read_only = " "
 truncate_to_repo = true
 
 [docker_context]
 disabled = true
 
 [git_branch]
-ignore_branches = ['master', 'main']
+symbol = 'שׂ'
 
 [git_status]
 conflicted = '🏳'
-ahead = '🏎💨'
+ahead = '🏎💨\($count\)'
 behind = '😰'
 diverged = '😵'
 up_to_date = ''
