@@ -68,6 +68,7 @@
 				];
 				specialArgs = {
 					inherit systemSettings;
+          inherit userSettings;
 					inherit inputs;
 				};
 

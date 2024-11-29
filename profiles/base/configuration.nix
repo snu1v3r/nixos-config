@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, systemSettings, ... }:
+{ config, pkgs, inputs, systemSettings, userSettings, ... }:
 
 {
   imports =
@@ -26,17 +26,20 @@
     size = 8 * 1024; # 8 GB swapfile
   }];
 
-  networking.hostName = systemSettings.hostname;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+    hostName = systemSettings.hostname;
+  };
+
 
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = systemSettings.timezone;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -88,7 +91,7 @@
   console.keyMap = "dvorak";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -154,7 +157,22 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
+  security.pam = {
+    u2f = {
+      enable = true;
+      settings = {
+        cue = true;
+        authFile = ( "/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
+      };
+    };
+    services = {
+      login.u2fAuth = true;
+      sudo = {
+        u2fAuth = true;
+        sshAgentAuth = true;
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
