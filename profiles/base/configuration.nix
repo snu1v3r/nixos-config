@@ -74,6 +74,7 @@
     elisa
     kate
     khelpcenter
+    kwallet
   ];
 
   
