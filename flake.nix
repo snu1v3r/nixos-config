@@ -33,8 +33,8 @@
         prompt = "p10k"; # options are: starship, p10k, oh-my-posh
 ## walrus is a normal work machine
 ## shark is a gui-less server machine
-## killerwhale is a hacking machine
-## barracuda is a reversing machine
+## hawk is a hacking machine
+## raptor is a reversing machine
       };
 
       lib = nixpkgs.lib;
@@ -48,7 +48,28 @@
         walrus = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            ./hosts/work
+            ./hosts/walrus
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
+        };
+        raptor = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./hosts/raptor
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
