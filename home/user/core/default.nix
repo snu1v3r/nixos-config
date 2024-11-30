@@ -26,19 +26,22 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   imports = [
-    ../common/zsh
     ../common/bat
+    ../common/codium
     ../common/eza
+    ../common/fzf
+    ../common/git
+    ../common/flameshot
     ../common/lazygit
-    ../common/${userSettings.emulator} # This selects the terminal emulator
-    ../common/zoxide
-    ../common/starship
     ../common/mc
-    ../common/${userSettings.browser}
     ../common/nvim
     ../common/plasma
-    ../common/codium
-    ../common/flameshot
+    ../common/starship
+    ../common/tmux
+    ../common/zoxide
+    ../common/zsh
+    ../common/${userSettings.browser}
+    ../common/${userSettings.emulator} # This selects the terminal emulator
   ];
 
 
@@ -47,25 +50,6 @@
   # This can be used to manage environment variables
   home.sessionVariables = {
     # EDITOR = "emacs";
-  };
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      vi = "nvim";
-      vim = "nvim";
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-
-  };
-  programs.git = {
-    enable = true;
-    userEmail = "snu1v3r@github.com";
-    userName = "snu1v3r";
   };
 
 }
