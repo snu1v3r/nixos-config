@@ -8,6 +8,11 @@
         edit = "/etc/profiles/per-user/user/bin/nvim {{filename}}";
         editAtLine = "/etc/profiles/per-user/user/bin/nvim {{filename}} +{{line}}";
       };
+      git = {
+        refresher = {
+          fetchInterval = 300;
+        };
+      };
     };
   };
 }
