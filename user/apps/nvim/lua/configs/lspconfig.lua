@@ -21,14 +21,14 @@ for _, lsp in ipairs(servers) do
           expr = "import <nixpkgs> { }",
         },
         formatting = {
-          command = { "alejandra" },
+          command = { "nixfmt" },
         },
         options = {
           nixos  = {
-            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix)".nixosConfigurations.system.options',
+            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix").nixosConfigurations.system.options',
           },
           home_manager = {
-            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix)".nixosConfigurations.system.options',
+            expr = '(builtins.getFlake "/home/user/nixos-config/flake.nix").nixosConfigurations.system.options',
           },
         },
       },
