@@ -5,6 +5,7 @@
     lua-language-server
     nixd
     alejandra
+    nixfmt
   ];
   programs = {
     neovim = {
