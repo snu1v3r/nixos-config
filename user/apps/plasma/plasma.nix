@@ -1,5 +1,5 @@
 # https://nix-community.github.io/plasma-manager/options.xhtml
-{ pkgs, userSettings, ... }: {
+{ lib, pkgs, userSettings, ... }: {
   programs.plasma = {
     enable = true;
     fonts = {
@@ -50,10 +50,10 @@
         "Switch Window Right" = "Meta+Shift+Right";
 
       };
-      "services/${userSettings.emulator}.desktop"."_launch" = "Meta+Return";
       "org.flameshot.Flameshot.desktop"."Capture" = "Print";
       "services/${userSettings.browser}.desktop"."_launch" = "Meta+B";
+    } // lib.optionalAttrs (userSettings.emulator == "kitty") {"services/kitty.desktop"."_launch" = "Meta+Return";
+    } // lib.optionalAttrs (userSettings.emulator == "alacritty") {"services/Alacritty.desktop"."_launch" = "Meta+Return";
     };
-
   };
 }
