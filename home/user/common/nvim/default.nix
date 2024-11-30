@@ -19,6 +19,6 @@
     };
   };
 
-  home.file.".config/nvim".source = ./.;
+  home.file.".config/nvim".source = ./config;
   home.file.".config/nvim".recursive = true;
 }

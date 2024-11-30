@@ -40,7 +40,7 @@ in
     plugins = lib.mkIf (userSettings.prompt == "p10k") [
       {
         name = "powerlevel10k-config";
-        src = ./../apps/p10k;
+        src = ./../p10k;
         file = "p10k.zsh";
       }
       {

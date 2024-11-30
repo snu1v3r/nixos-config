@@ -14,10 +14,10 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ../../system/hardware-configuration.nix
-    ../../system/nvidia-drivers.nix
-    ../../system/vm-guest-services.nix
-    ../../user/apps/stylix/stylix.nix
+    ../../../system/hardware-configuration.nix
+    ../../../system/nvidia-drivers.nix
+    ../../../system/vm-guest-services.nix
+    ../../../home/user/common/stylix   ## TODO this has to move to a user related file
   ];
 
   # Bootloader.

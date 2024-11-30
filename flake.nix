@@ -14,7 +14,6 @@
       systemSettings = {
         system = "x86_64-linux"; # system arch
         hostname = "nixos"; # hostname
-        profile = "reversing"; # options are: base, personal, hacking, pentesting, reversing
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
         nvidia-drivers = false;
@@ -32,6 +31,10 @@
         emulator = "alacritty"; # options are: kitty, alacritty
         browser = "brave";
         prompt = "p10k"; # options are: starship, p10k, oh-my-posh
+## walrus is a normal work machine
+## shark is a gui-less server machine
+## killerwhale is a hacking machine
+## barracuda is a reversing machine
       };
 
       lib = nixpkgs.lib;
@@ -42,17 +45,16 @@
         extraSpecialArgs = {
           inherit inputs;
         };
-        system = lib.nixosSystem {
+        walrus = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            ./profiles/${systemSettings.profile}/configuration.nix
+            ./hosts/work
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-              home-manager.users.user = import ./profiles/${systemSettings.profile}/home.nix;
               home-manager.extraSpecialArgs = {
                 inherit userSettings;
               };

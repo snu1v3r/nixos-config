@@ -11,7 +11,7 @@
   # manage.
 
   home.username = userSettings.username;
-  home.homeDirectory = "/home/" + userSettings.username;
+  home.homeDirectory = lib.mkDefault "/home/${userSettings.username}";
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -26,32 +26,24 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   imports = [
-    ../../user/shell/zshell.nix
-    ../../user/shell/cli-collection.nix
-    ../../user/apps/${userSettings.emulator} # This selects the terminal emulator
-    ../../user/apps/zoxide
-    ../../user/apps/starship
+    ../common/zsh
+    ../common/bat
+    ../common/eza
+    ../common/lazygit
+    ../common/${userSettings.emulator} # This selects the terminal emulator
+    ../common/zoxide
+    ../common/starship
+    ../common/mc
+    ../common/${userSettings.browser}
+    ../common/nvim
+    ../common/plasma
+    ../common/codium
+    ../common/flameshot
   ];
 
-  home.packages = with pkgs; [ mc ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-    ".local/share/mc/skins".source = ../../user/apps/mc/skins;
-    ".config/mc".source = ../../user/apps/mc;
-  };
-
   # This can be used to manage environment variables
   home.sessionVariables = {
     # EDITOR = "emacs";
