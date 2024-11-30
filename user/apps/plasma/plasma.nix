@@ -1,6 +1,5 @@
 # https://nix-community.github.io/plasma-manager/options.xhtml
-{ pkgs, userSettings, ...}:
-{
+{ pkgs, userSettings, ... }: {
   programs.plasma = {
     enable = true;
     fonts = {
@@ -11,12 +10,7 @@
     };
     kwin.virtualDesktops = {
       rows = 2;
-      names = [
-      "Desktop 1"
-      "Desktop 2"
-      "Desktop 3"
-      "Desktop 4"
-      ];
+      names = [ "Desktop 1" "Desktop 2" "Desktop 3" "Desktop 4" ];
     };
     shortcuts = {
       kwin = {
@@ -43,7 +37,7 @@
         "Window to Desktop 3" = "Alt+3";
         "Window to Desktop 4" = "Alt+4";
         "Window Maximize" = "Alt+Return";
-	"Window Fullscreen" = "Alt+Shift+Return";
+        "Window Fullscreen" = "Alt+Shift+Return";
         "Window Quick Tile Bottom" = "Alt+Shift+Down";
         "Window Quick Tile Top" = "Alt+Shift+Up";
         "Window Quick Tile Left" = "Alt+Shift+Left";
@@ -54,8 +48,6 @@
         "Switch Window Up" = "Meta+Shift+Up";
         "Switch Window Left" = "Meta+Shift+Left";
         "Switch Window Right" = "Meta+Shift+Right";
-
-
 
       };
       "services/${userSettings.emulator}.desktop"."_launch" = "Meta+Return";

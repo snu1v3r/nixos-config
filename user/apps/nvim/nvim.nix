@@ -1,12 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  home.packages = with pkgs; [
-    lua-language-server
-    nixd
-    alejandra
-    nixfmt
-  ];
+  home.packages = with pkgs; [ lua-language-server nixd alejandra nixfmt ];
   programs = {
     neovim = {
       enable = true;

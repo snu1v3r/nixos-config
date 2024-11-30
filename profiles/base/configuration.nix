@@ -5,27 +5,29 @@
 { config, pkgs, inputs, systemSettings, userSettings, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../../system/hardware-configuration.nix
-      ../../system/nvidia-drivers.nix
-      ../../system/vm-guest-services.nix
-      ../../user/apps/stylix/stylix.nix
-    ];
-
+  imports = [ # Include the results of the hardware scan.
+    ../../system/hardware-configuration.nix
+    ../../system/nvidia-drivers.nix
+    ../../system/vm-guest-services.nix
+    ../../user/apps/stylix/stylix.nix
+  ];
 
   # Bootloader.
-  boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
-  boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
-  boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootloader == "systemd") then true else false;
+  boot.loader.grub.enable =
+    if (systemSettings.bootloader == "grub") then true else false;
+  boot.loader.grub.device =
+    if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
+  boot.loader.grub.useOSProber =
+    if (systemSettings.bootloader == "grub") then true else false;
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootloader == "systemd") then true else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootloader == "systemd") then true else false;
 
   swapDevices = [{
     device = "/swapfile";
     size = 8 * 1024; # 8 GB swapfile
   }];
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -36,7 +38,6 @@
     networkmanager.enable = true;
     hostName = systemSettings.hostname;
   };
-
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
@@ -61,14 +62,12 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.xterm.enable = false;
 
-
-
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.enable = true;
 
   services.desktopManager.plasma6.enable = true;
-  
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
     elisa
@@ -77,7 +76,6 @@
     kwallet
   ];
 
-  
   vm.guest-services.type = systemSettings.vm-guest-type;
   drivers.nvidia.enable = systemSettings.nvidia-drivers;
 
@@ -87,7 +85,7 @@
     variant = "dvorak";
   };
 
-#  services.picom.enable = true;
+  #  services.picom.enable = true;
   # Configure console keymap
   console.keyMap = "dvorak";
 
@@ -120,29 +118,27 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  programs = { 
-  	firefox.enable = false;
+  programs = {
+    firefox.enable = false;
     zsh.enable = true;
-	};
-
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
 
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
-  	experimental-features = nix-command flakes
+    experimental-features = nix-command flakes
   '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-	neovim
-	xclip
-  gcc
-  gparted
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
+    xclip
+    gcc
+    gparted
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -163,7 +159,8 @@
       enable = true;
       settings = {
         cue = true;
-        authFile = ( "/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
+        authFile =
+          ("/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
       };
     };
     services = {
@@ -183,7 +180,6 @@
 
   # Enabling Nix Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
