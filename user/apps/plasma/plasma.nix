@@ -51,7 +51,7 @@
 
       };
       "org.flameshot.Flameshot.desktop"."Capture" = "Print";
-      "services/${userSettings.browser}.desktop"."_launch" = "Meta+B";
+    } // lib.optionalAttrs (userSettings.browser == "brave") { "services/brave-browser.desktop"."_launch" = "Meta+B";
     } // lib.optionalAttrs (userSettings.emulator == "kitty") {"services/kitty.desktop"."_launch" = "Meta+Return";
     } // lib.optionalAttrs (userSettings.emulator == "alacritty") {"services/Alacritty.desktop"."_launch" = "Meta+Return";
     };

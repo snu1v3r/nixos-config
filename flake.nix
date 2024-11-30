@@ -25,7 +25,7 @@
         name = "User";
         dotfilesDir = "~/nixos-config";
         emulator = "alacritty"; # options are: kitty, alacritty
-        browser = "brave-browser";
+        browser = "brave";
         prompt = "p10k"; # options are: starship, p10k, oh-my-posh
       };
 

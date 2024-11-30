@@ -10,9 +10,7 @@
     ../../user/apps/flameshot/flameshot.nix
     ../../user/apps/plasma/plasma.nix
     ../../user/apps/codium/codium.nix
-    (./. + "/../../user/apps"
-      + ("/" + userSettings.browser + "/" + userSettings.browser)
-      + ".nix") # This selects the terminal emulator
+    ../../user/apps/${userSettings.browser} # This selects the browser
   ];
 
   home.packages = with pkgs; [ ida-free ghidra radare2 pwndbg ];
