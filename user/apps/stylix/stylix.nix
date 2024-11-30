@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, systemSettings, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  systemSettings,
+  ...
+}:
 
 {
   stylix.enable = true;

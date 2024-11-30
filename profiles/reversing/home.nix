@@ -1,4 +1,9 @@
-{ config, pkgs, userSettings, ... }:
+{
+  config,
+  pkgs,
+  userSettings,
+  ...
+}:
 
 {
 
@@ -13,7 +18,12 @@
     ../../user/apps/${userSettings.browser} # This selects the browser
   ];
 
-  home.packages = with pkgs; [ ida-free ghidra radare2 pwndbg ];
+  home.packages = with pkgs; [
+    ida-free
+    ghidra
+    radare2
+    pwndbg
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -36,4 +46,3 @@
   };
 
 }
-

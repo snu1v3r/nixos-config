@@ -2,10 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, systemSettings, userSettings, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  systemSettings,
+  userSettings,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ../../system/hardware-configuration.nix
     ../../system/nvidia-drivers.nix
     ../../system/vm-guest-services.nix
@@ -13,21 +21,19 @@
   ];
 
   # Bootloader.
-  boot.loader.grub.enable =
-    if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.grub.device =
-    if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
-  boot.loader.grub.useOSProber =
-    if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.systemd-boot.enable =
-    if (systemSettings.bootloader == "systemd") then true else false;
+  boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
+  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
+  boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
+  boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
   boot.loader.efi.canTouchEfiVariables =
     if (systemSettings.bootloader == "systemd") then true else false;
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 8 * 1024; # 8 GB swapfile
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8 * 1024; # 8 GB swapfile
+    }
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -115,7 +121,10 @@
     isNormalUser = true;
     description = "user";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   programs = {
@@ -159,8 +168,7 @@
       enable = true;
       settings = {
         cue = true;
-        authFile =
-          ("/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
+        authFile = ("/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
       };
     };
     services = {
@@ -179,7 +187,10 @@
   # networking.firewall.enable = false;
 
   # Enabling Nix Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

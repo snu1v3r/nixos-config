@@ -2,14 +2,19 @@
 
   description = "Basic Flake configuration!";
 
-  outputs = { nixpkgs, home-manager, plasma-manager, ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      plasma-manager,
+      ...
+    }@inputs:
     let
       # --- GLOBAL SYSTEM SETTINGS --- #
       systemSettings = {
         system = "x86_64-linux"; # system arch
         hostname = "nixos"; # hostname
-        profile =
-          "reversing"; # options are: base, personal, hacking, pentesting, reversing
+        profile = "reversing"; # options are: base, personal, hacking, pentesting, reversing
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
         nvidia-drivers = false;
@@ -31,9 +36,12 @@
 
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-    in {
+    in
+    {
       nixosConfigurations = {
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+        };
         system = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
@@ -43,11 +51,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules =
-                [ plasma-manager.homeManagerModules.plasma-manager ];
-              home-manager.users.user =
-                import ./profiles/${systemSettings.profile}/home.nix;
-              home-manager.extraSpecialArgs = { inherit userSettings; };
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.users.user = import ./profiles/${systemSettings.profile}/home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
             }
           ];
           specialArgs = {
@@ -64,7 +72,9 @@
     ###### Packages URL-s ######
 
     ### Base NixOS packages
-    nixpkgs = { url = "nixpkgs/nixos-unstable"; };
+    nixpkgs = {
+      url = "nixpkgs/nixos-unstable";
+    };
 
     ### Home manager
     home-manager = {
@@ -85,7 +95,9 @@
     };
 
     ### Stylix for easy configuration of environment
-    stylix = { url = "github:danth/stylix"; };
+    stylix = {
+      url = "github:danth/stylix";
+    };
   };
 
 }

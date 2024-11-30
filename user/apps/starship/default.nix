@@ -1,4 +1,10 @@
-{ lib, pkgs, config, userSettings, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  userSettings,
+  ...
+}:
 
 {
   config = lib.mkIf (userSettings.prompt == "starship") {
