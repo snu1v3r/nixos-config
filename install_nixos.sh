@@ -35,6 +35,15 @@ fi
 
 cd $SCRIPT_DIR
 
+read -rp "Which system to configure (walrus | snake | raptor | hawk | dragon | lizard ): [walrus] " system
+if [ -z "$system" ]; then
+  system="walrus"
+fi
+
+echo "-----"
+echo "Configuration modified for $system system"
+sed -i "/^\s*system=/s/\(walrus\|lizard\|snake\|raptor\|hawk\|dragon\)/$system/" ./rebuild.sh
+
 read -rp "Special Graphics Driver (none | nvidia ):  [none] " graphics
 if [ -z "$graphics" ]; then
   graphics="none"
@@ -80,6 +89,7 @@ else
   echo "Configuration modified for 'grub' bootloader"
   sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
 fi
+exit
 
 echo "-----"
 echo "Generating Harware Configuration"
@@ -94,5 +104,5 @@ nixversion=`nixos-version | sed 's/\(.*\) .*/\1_/'`
 echo "Setting Required Nix Settings Then Going To Install"
 NIX_CONFIG="experimental-features = nix-command flakes"
 NIXOS_LABEL="$nixversion$hms.$branch-${revision:0:7}" 
-sudo nixos-rebuild switch --impure --flake $SCRIPT_DIR#system
+sudo nixos-rebuild switch --impure --flake $SCRIPT_DIR#$system
 
