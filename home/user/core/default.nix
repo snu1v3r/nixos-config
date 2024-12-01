@@ -27,21 +27,16 @@
   # environment.
   imports = [
     ../common/bat
-    ../common/codium
     ../common/eza
     ../common/fzf
     ../common/git
-    ../common/flameshot
     ../common/lazygit
     ../common/mc
     ../common/nvim
-    ../common/plasma
     ../common/starship
     ../common/tmux
     ../common/zoxide
     ../common/zsh
-    ../common/${userSettings.browser}
-    ../common/${userSettings.emulator} # This selects the terminal emulator
   ];
 
 

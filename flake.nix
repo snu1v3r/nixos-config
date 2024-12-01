@@ -13,7 +13,6 @@
       # --- GLOBAL SYSTEM SETTINGS --- #
       systemSettings = {
         system = "x86_64-linux"; # system arch
-        hostname = "nixos"; # hostname
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
         nvidia-drivers = false;

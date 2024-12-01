@@ -1,7 +1,7 @@
-{ ... }:
+{ config, ... }:
 
 {
-  home-manager.users.user = import ../../../../home/user/walrus;
+  home-manager.users.user = import ../../../../home/user/${config.networking.hostName};
 }
 
 
