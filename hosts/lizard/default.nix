@@ -11,6 +11,7 @@
   # is the only machine that will act as a host. The other machines will only be used for guests
 
   networking.hostName = "lizard";
+  networking.hostId = "4e98920d";
   virtualisation.vmware.host.enable = systemSettings.vm-host;
 
 }
