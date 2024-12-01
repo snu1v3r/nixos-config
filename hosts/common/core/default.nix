@@ -15,7 +15,6 @@
   imports = [
     # Include the results of the hardware scan.
     ../../../system/hardware-configuration.nix
-    ../../../system/nvidia-drivers.nix
     ../../../system/vm-guest-services.nix
   ];
 
@@ -30,7 +29,7 @@
   swapDevices = [
     {
       device = "/swapfile";
-      size = 8 * 1024; # 8 GB swapfile
+      size = systemSettings.swapsize * 1024; # 8 GB swapfile
     }
   ];
 
@@ -62,40 +61,7 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-  services.xserver.desktopManager.xterm.enable = false;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.defaultSession = "plasma";
-  services.displayManager.sddm.enable = true;
-
-  services.desktopManager.plasma6.enable = true;
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    konsole
-    elisa
-    kate
-    khelpcenter
-    kwallet
-  ];
-
   vm.guest-services.type = systemSettings.vm-guest-type;
-  drivers.nvidia.enable = systemSettings.nvidia-drivers;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "dvorak";
-  };
-
-  #  services.picom.enable = true;
-  # Configure console keymap
-  console.keyMap = "dvorak";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = false;
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -141,13 +107,6 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
-    xclip
-    gcc
-    gparted
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -167,7 +126,7 @@
       enable = true;
       settings = {
         cue = true;
-        authFile = ("/home" + ("/" + userSettings.username + "/config/Yubico/u2f_keys"));
+        authFile = "/home/${userSettings.username}/config/Yubico/u2f_keys";
       };
     };
     services = {

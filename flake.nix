@@ -20,6 +20,7 @@
         bootloader = "grub";
         vm-guest-type = "vmware"; # options are: vmware, spice, qemu, none
         vm-host = false;
+        swapsize = 8; # Size of the swapfile in GB
 
       };
 
@@ -31,10 +32,6 @@
         emulator = "alacritty"; # options are: kitty, alacritty
         browser = "brave";
         prompt = "p10k"; # options are: starship, p10k, oh-my-posh
-## walrus is a normal work machine
-## shark is a gui-less server machine
-## hawk is a hacking machine
-## raptor is a reversing machine
       };
 
       lib = nixpkgs.lib;
@@ -48,7 +45,7 @@
         walrus = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            ./hosts/walrus
+            ./hosts/walrus # this is a normal work machine with a graphical desktop
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
@@ -69,7 +66,69 @@
         raptor = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            ./hosts/raptor
+            ./hosts/raptor # this is a machine with a graphical desktop and a specific set of tools for reverse engineering
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
+        };
+        hawk = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./hosts/hawk # this is a machine with a graphical desktop and a specific set of tools for hacking
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
+        };
+        snake = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./hosts/snake # this is bare-bone machine without a graphical user interface specifically intended for servers
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
+        };
+        dragon = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./hosts/dragon # this is normal machine with a graphical user interface specifically intended for code development
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {

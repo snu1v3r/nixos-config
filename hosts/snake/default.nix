@@ -3,7 +3,6 @@
 {
   imports = [
     ../common/core
-    ../common/optional/base_gui
     ../common/optional/stylix
     ../common/users/user
   ];
