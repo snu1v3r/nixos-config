@@ -145,6 +145,27 @@
             inherit inputs;
           };
         };
+        lizard = lib.nixosSystem {
+          system = systemSettings.system;
+          modules = [
+            ./hosts/lizard # this is base machine intended to run in a lxc container
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit systemSettings;
+            inherit userSettings;
+            inherit inputs;
+          };
+        };
       };
     };
 
