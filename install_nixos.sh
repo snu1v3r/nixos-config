@@ -59,21 +59,6 @@ else
   sed -i "/^\s*nvidia-drivers[[:space:]]*=[[:space:]]*/s/\(true\|false\)/false/" ./flake.nix
 fi
 
-read -rp "Which profile should be used ( personal | hacking ): [personal] " profile
-if [ -z "$profile" ]; then
-  profile="personal"
-fi
-
-if [ $profile = "hacking" ]; then
-  echo "-----"
-  echo "Configuration modified for 'hacking' profile"
-  sed -i "/^\s*profile\s*=\s*/s/\"\(.*\)\"/\"$profile\"/" ./flake.nix
-else
-  echo "-----"
-  echo "Configuration modified for 'personal' profile"
-  sed -i "/^\s*profile\s*=\s*/s/\"\(.*\)\"/\"$profile\"/" ./flake.nix
-fi
-
 echo "-----"
 read -rp "Which bootloader was used during installation (grub | systemd): [grub] " bootloader
 if [ -z "$bootloader" ]; then
