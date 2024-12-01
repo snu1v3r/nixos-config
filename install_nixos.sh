@@ -89,7 +89,6 @@ else
   echo "Configuration modified for 'grub' bootloader"
   sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
 fi
-exit
 
 echo "-----"
 echo "Generating Harware Configuration"
