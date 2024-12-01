@@ -13,5 +13,8 @@
   networking.hostName = "lizard";
   networking.hostId = "4e98920d";
   virtualisation.vmware.host.enable = systemSettings.vm-host;
+  users.users.root = {
+    shell = pkgs.zsh;
+  };
 
 }

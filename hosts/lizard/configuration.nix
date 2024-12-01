@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  lib,
   config,
   pkgs,
   inputs,
@@ -18,13 +19,24 @@
     ../../system/vm-guest-services.nix
   ];
 
-  # Bootloader.
+  # Indicating this is a container and a bootloader is not used
   boot.isContainer = true;
 
-  systemd.mounts = [{
-    where = "/sys/kernel/debug";
-    enable = false;
-  }];
+
+  # Enable loading the latest generation as the booted system
+  system.activationScripts.installInitScript = lib.mkForce ''
+    mkdir -p /sbin
+    ln -fs $systemConfig/init /sbin/init
+  '';
+
+  # These systemd units need to be suppressed, because a non-privileged container is not able to use them
+  systemd.suppressedSystemUnits = [
+    "dev-mqueue.mount"
+    "sys-kernel-debug.mount"
+    "sys-fs-fuse-connections.mount"
+    "zfs-share.service"
+    "zfs-mount.service"
+  ];
 
   swapDevices = [
     {
