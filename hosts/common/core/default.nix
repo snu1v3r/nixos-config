@@ -17,7 +17,6 @@
     ../../../system/hardware-configuration.nix
     ../../../system/nvidia-drivers.nix
     ../../../system/vm-guest-services.nix
-    ../../../home/user/common/stylix   ## TODO this has to move to a user related file
   ];
 
   # Bootloader.
