@@ -19,12 +19,12 @@
   ];
 
   # Bootloader.
-  boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
-  boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
-  boot.loader.efi.canTouchEfiVariables =
-    if (systemSettings.bootloader == "systemd") then true else false;
+  boot.isContainer = true;
+
+  systemd.mounts = [{
+    where = "/sys/kernel/debug";
+    enable = false;
+  }];
 
   swapDevices = [
     {
@@ -65,32 +65,10 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
-    isNormalUser = true;
-    description = "user";
-    shell = pkgs.zsh;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-  };
 
   programs = {
     firefox.enable = false;
@@ -121,22 +99,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  security.pam = {
-    u2f = {
-      enable = true;
-      settings = {
-        cue = true;
-        authFile = "/home/${userSettings.username}/config/Yubico/u2f_keys";
-      };
-    };
-    services = {
-      login.u2fAuth = true;
-      sudo = {
-        u2fAuth = true;
-        sshAgentAuth = true;
-      };
-    };
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
