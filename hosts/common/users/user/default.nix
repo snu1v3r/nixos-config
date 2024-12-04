@@ -5,8 +5,11 @@
       users.users.user = {
       home = "/home/user";
       isNormalUser = true;
-
-      extraGroups = [ "wheel" ];
+      shell = pkgs.zsh;
+      extraGroups = [ 
+        "wheel"
+        "networkmanager"
+      ];
     };
     
     home-manager.users.user = import ../../../../home/user/${config.networking.hostName};

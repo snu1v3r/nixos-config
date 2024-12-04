@@ -82,19 +82,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
-    isNormalUser = true;
-    description = "user";
-    shell = pkgs.zsh;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-  };
 
-  users.users.root = {
-    shell = pkgs.zsh;
-  };
   programs = {
     firefox.enable = false;
     zsh.enable = true;
