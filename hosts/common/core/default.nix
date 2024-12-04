@@ -92,6 +92,9 @@
     ];
   };
 
+  users.users.root = {
+    shell = pkgs.zsh;
+  };
   programs = {
     firefox.enable = false;
     zsh.enable = true;
