@@ -15,10 +15,10 @@
         system = "x86_64-linux"; # system arch
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
-        nvidia-drivers = false;
+        nvidiaDrivers = false;
         bootloader = "grub";
-        vm-guest-type = "vmware"; # options are: vmware, spice, qemu, none
-        vm-host = false;
+        vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
+        vmHost = false;
         swapsize = 8; # Size of the swapfile in GB
 
       };

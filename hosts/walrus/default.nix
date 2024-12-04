@@ -13,6 +13,6 @@
   # is the only machine that will act as a host. The other machines will only be used for guests
   networking.hostName = "walrus";
 
-  virtualisation.vmware.host.enable = systemSettings.vm-host;
+  virtualisation.vmware.host.enable = systemSettings.vmHost;
 
 }
