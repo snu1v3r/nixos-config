@@ -33,11 +33,12 @@
     ../common/lazygit
     ../common/mc
     ../common/nvim
-    ../common/starship
     ../common/tmux
     ../common/zoxide
     ../common/zsh
-  ];
+  ] ++
+    lib.optionals (userSettings.prompt == "starship")
+    [ ../common/starship ];
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
