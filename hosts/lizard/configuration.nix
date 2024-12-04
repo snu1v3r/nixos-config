@@ -73,7 +73,6 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
-  vm.guest-services.type = systemSettings.vm-guest-type;
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
