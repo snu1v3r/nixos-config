@@ -7,6 +7,7 @@
       nixpkgs,
       home-manager,
       plasma-manager,
+#      sops-nix,
       ...
     }@inputs:
     let
@@ -20,7 +21,7 @@
         vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
         vmHost = false;
         swapsize = 8; # Size of the swapfile in GB
-
+#        useSops = false;
       };
 
       # --- GLOBAL USER SETTINGS --- #
@@ -45,6 +46,7 @@
           system = systemSettings.system;
           modules = [
             ./hosts/walrus # this is a normal work machine with a graphical desktop
+#            sops-nix.nixosModules.sops
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
@@ -55,7 +57,9 @@
                 inherit userSettings;
               };
             }
+#          ] ++ lib.mkIf (systemSettings.useSops) [ sops-nix.nixosModules.sops]          ;
           ];
+
           specialArgs = {
             inherit systemSettings;
             inherit userSettings;
@@ -200,6 +204,19 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ### SOPS is used for secrets management
+#    sops-nix = {
+#      url = "github:Mic92/sops-nix";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
+
+    ### This is the repo where my secrets are stored
+#    nix-secrets = {
+#      url = "git+ssh://git@github.com/snu1v3r/nix-secrets?shallow=1&ref=main";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#      flake = false;
+#    };
   };
 
 }
