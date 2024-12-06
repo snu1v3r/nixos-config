@@ -198,6 +198,7 @@
     ### Stylix for easy configuration of environment
     stylix = {
       url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
