@@ -9,7 +9,7 @@
 {
   stylix.enable = true;
 
-  stylix.base16Scheme = ../../../../theming/colors/catppucchin-mocha.yaml;
+  stylix.base16Scheme = ../../../../theming/colors/tokyonight.yaml;
 
   stylix.image = ../../../../theming/backgrounds/0001.jpg;
   stylix.cursor.package = pkgs.bibata-cursors;
