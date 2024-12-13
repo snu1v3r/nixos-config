@@ -981,7 +981,7 @@ require("lspconfig").nixd.setup({
         expr = "import <nixpkgs> { }",
       },
       formatting = {
-        command = { "alejandra" }, -- or nixfmt or nixpkgs-fmt
+        command = { "nixfmt" }, -- or nixfmt or nixpkgs-fmt
       },
       options = {
         nixos = {
