@@ -5,7 +5,7 @@
     shell = pkgs.zsh;
   };
 
-  home-manager.users.root = import ../../../../home/root/${config.networking.hostName};
+  #  home-manager.users.root = import ../../../../home/root/${config.networking.hostName};
 }
 
 
