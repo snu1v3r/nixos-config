@@ -48,6 +48,15 @@
             ./hosts/walrus # this is a normal work machine with a graphical desktop
             #            sops-nix.nixosModules.sops
             inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = {
+                inherit userSettings;
+              };
+            }
           ];
 
           specialArgs = {

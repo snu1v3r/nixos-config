@@ -29,7 +29,7 @@ in
 #      };
 #    };
   
-    #    home-manager.users.user = import ../../../../home/user/${config.networking.hostName};
+        home-manager.users.user = import ../../../../home/user/${config.networking.hostName};
 
   };
 }
