@@ -7,7 +7,7 @@
 }:
 
 {
- nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -38,15 +38,13 @@
     ../common/tmux
     ../common/zoxide
     ../common/zsh
-  ] ++
-    lib.optionals (userSettings.prompt == "starship")
-    [ ../common/starship ];
+    ../common/ripgrep
+  ] ++ lib.optionals (userSettings.prompt == "starship") [ ../common/starship ];
 
   # Possibly temporary for SOPS. If to many lines this should be moved to the imports above
-#  home.packages = with pkgs; [
-#    age
-#  ];
-
+  #  home.packages = with pkgs; [
+  #    age
+  #  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
