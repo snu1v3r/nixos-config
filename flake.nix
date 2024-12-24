@@ -7,7 +7,7 @@
       nixpkgs,
       home-manager,
       plasma-manager,
-#      sops-nix,
+      #      sops-nix,
       ...
     }@inputs:
     let
@@ -21,7 +21,7 @@
         vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
         vmHost = false;
         swapsize = 8; # Size of the swapfile in GB
-#        useSops = false;
+        #        useSops = false;
       };
 
       # --- GLOBAL USER SETTINGS --- #
@@ -45,8 +45,8 @@
         walrus = lib.nixosSystem {
           system = systemSettings.system;
           modules = [
-            ./walrus # this is a normal work machine with a graphical desktop
-#            sops-nix.nixosModules.sops
+            ./hosts/walrus # this is a normal work machine with a graphical desktop
+            #            sops-nix.nixosModules.sops
             inputs.stylix.nixosModules.stylix
           ];
 
@@ -86,7 +86,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ inputs.stylix.homeManagerModules.stylix plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.sharedModules = [
+                inputs.stylix.homeManagerModules.stylix
+                plasma-manager.homeManagerModules.plasma-manager
+              ];
               home-manager.extraSpecialArgs = {
                 inherit userSettings;
               };
@@ -196,17 +199,17 @@
     };
 
     ### SOPS is used for secrets management
-#    sops-nix = {
-#      url = "github:Mic92/sops-nix";
-#      inputs.nixpkgs.follows = "nixpkgs";
-#    };
+    #    sops-nix = {
+    #      url = "github:Mic92/sops-nix";
+    #      inputs.nixpkgs.follows = "nixpkgs";
+    #    };
 
     ### This is the repo where my secrets are stored
-#    nix-secrets = {
-#      url = "git+ssh://git@github.com/snu1v3r/nix-secrets?shallow=1&ref=main";
-#      inputs.nixpkgs.follows = "nixpkgs";
-#      flake = false;
-#    };
+    #    nix-secrets = {
+    #      url = "git+ssh://git@github.com/snu1v3r/nix-secrets?shallow=1&ref=main";
+    #      inputs.nixpkgs.follows = "nixpkgs";
+    #      flake = false;
+    #    };
   };
 
 }
