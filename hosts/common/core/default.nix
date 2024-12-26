@@ -89,7 +89,20 @@
   programs = {
     firefox.enable = false;
     zsh.enable = true;
+    ssh.startAgent = true;
+
   };
+
+  environment.systemPackages = with pkgs; [
+    gnumake
+    unzip
+    lua51Packages.lua
+    luarocks-nix
+    tree-sitter
+    nodejs-slim
+    fd
+
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
