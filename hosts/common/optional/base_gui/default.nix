@@ -51,6 +51,7 @@
     xclip
     gcc
     gparted
+    keepassxc
   ];
 
 }
