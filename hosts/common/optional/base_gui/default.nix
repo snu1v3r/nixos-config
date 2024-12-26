@@ -9,11 +9,9 @@
 }:
 
 {
-  imports =
-    [
-      # This is a placeholder for the default files to import
-    ]
-    ++ lib.optionals (systemSettings.nvidiaDrivers == true) [ ../../../../system/nvidia-drivers.nix ];
+  imports = [
+    # This is a placeholder for the default files to import
+  ] ++ lib.optionals (systemSettings.nvidiaDrivers == true) [ ../../../../system/nvidia-drivers.nix ];
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
