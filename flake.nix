@@ -17,7 +17,7 @@
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
         nvidiaDrivers = false;
-        bootloader = "grub";
+        bootloader = "systemd";
         vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
         vmHost = false;
         swapsize = 8; # Size of the swapfile in GB
