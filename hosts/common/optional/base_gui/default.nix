@@ -29,7 +29,6 @@
     elisa
     kate
     khelpcenter
-    kwallet
   ];
 
 
@@ -51,6 +50,7 @@
     gcc
     gparted
     keepassxc
+    thunderbird
   ];
 
 }
