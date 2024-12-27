@@ -32,7 +32,6 @@
     kwallet
   ];
 
-  #  drivers.nvidia.enable = systemSettings.nvidia-drivers;
 
   # Configure keymap in X11
   services.xserver.xkb = {
