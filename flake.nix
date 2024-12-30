@@ -19,8 +19,9 @@
         nvidiaDrivers =true;
         bootloader = "systemd";
         vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
-        vmHost = false;
+        vmHost = "qemu"; # options are: vmware, qemu, none
         swapsize = 8; # Size of the swapfile in GB
+
         #        useSops = false;
       };
 
