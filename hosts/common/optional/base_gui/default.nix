@@ -31,7 +31,6 @@
     khelpcenter
   ];
 
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -43,14 +42,12 @@
   console.keyMap = "dvorak";
 
   # Enable CUPS to print documents.
-  services.printing.enable = false;
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     xclip
     gcc
     gparted
     keepassxc
-    thunderbird
   ];
 
 }
