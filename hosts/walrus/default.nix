@@ -15,5 +15,12 @@
   # is the only machine that will act as a host. The other machines will only be used for guests
   networking.hostName = "walrus";
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+  environment.systemPackages = with pkgs; [
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    thunderbird
+    libreoffice-qt6
+  ];
 
 }
