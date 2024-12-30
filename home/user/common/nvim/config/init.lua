@@ -271,7 +271,7 @@ require("lazy").setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                   -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     "folke/which-key.nvim",
     event = "VimEnter", -- Sets the loading event to 'VimEnter'
     opts = {
@@ -756,6 +756,7 @@ require("lazy").setup({
       end,
       formatters_by_ft = {
         lua = { "stylua" },
+        nix = { "nixfmt" },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
