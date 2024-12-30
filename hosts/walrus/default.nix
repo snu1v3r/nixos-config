@@ -1,12 +1,18 @@
-{ pkgs, systemSettings, ... }:
+{
+  pkgs,
+  systemSettings,
+  lib,
+  ...
+}:
 
 {
-  imports = [
-    ../common/core
-    ../common/optional/base_gui
-    ../common/optional/stylix
-    ../common/users/user
-    ../common/users/root
+  imports =
+    [
+      ../common/core
+      ../common/optional/base_gui
+      ../common/optional/stylix
+      ../common/users/user
+      ../common/users/root
     ]
     ++ lib.optionals (systemSettings.vmHost == "qemu") [ ../common/optional/qemu_host ]
     ++ lib.optionals (systemSettings.vmHost == "vmware") [ ../common/optional/vmware_host ];
