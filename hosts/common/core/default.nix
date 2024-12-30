@@ -20,7 +20,7 @@
 
   # Bootloader.
   boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/sda" else "";
+  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/vda" else "";
   boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
   boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
   boot.loader.efi.canTouchEfiVariables =

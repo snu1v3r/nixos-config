@@ -1,195 +1,174 @@
 {
+  description = "Nixos config flake";
 
-  description = "Basic Flake configuration!";
-
-  outputs =
-    {
-      nixpkgs,
-      home-manager,
-      plasma-manager,
-      #      sops-nix,
-      ...
-    }@inputs:
-    let
-      # --- GLOBAL SYSTEM SETTINGS --- #
-      systemSettings = {
-        system = "x86_64-linux"; # system arch
-        timezone = "Europe/Amsterdam";
-        locale = "en_US.UTF-8";
-        nvidiaDrivers =true;
-        bootloader = "systemd";
-        vmGuestType = "vmware"; # options are: vmware, spice, qemu, none
-        vmHost = false;
-        swapsize = 8; # Size of the swapfile in GB
-        #        useSops = false;
-      };
-
-      # --- GLOBAL USER SETTINGS --- #
-      userSettings = {
-        username = "user";
-        name = "User";
-        dotfilesDir = "~/nixos-config";
-        emulator = "alacritty"; # options are: kitty, alacritty
-        browser = "brave";
-        prompt = "p10k"; # options are: starship, p10k, oh-my-posh
-      };
-
-      lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-    in
-    {
-      nixosConfigurations = {
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-        walrus = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/walrus # this is a normal work machine with a graphical desktop
-            #            sops-nix.nixosModules.sops
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-        raptor = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/raptor # this is a machine with a graphical desktop and a specific set of tools for reverse engineering
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-        hawk = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/hawk # this is a machine with a graphical desktop and a specific set of tools for hacking
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [
-                inputs.stylix.homeManagerModules.stylix
-                plasma-manager.homeManagerModules.plasma-manager
-              ];
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-        snake = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/snake # this is bare-bone machine without a graphical user interface specifically intended for servers
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-        dragon = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/dragon # this is normal machine with a graphical user interface specifically intended for code development
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-        lizard = lib.nixosSystem {
-          system = systemSettings.system;
-          modules = [
-            ./hosts/lizard # this is base machine intended to run in a lxc container
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit userSettings;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit systemSettings;
-            inherit userSettings;
-            inherit inputs;
-          };
-        };
-      };
+  outputs = { self, nixpkgs, home-manager, plasma-manager, stylix, ... }@inputs: 
+  let
+    # --- GLOBAL SYSTEM SETTINGS --- #
+    systemSettings = {
+      system = "x86_64-linux"; # system arch
+      timezone = "Europe/Amsterdam";
+      locale = "en_US.UTF-8";
+      nvidiaDrivers =false;
+      bootloader = "grub";
+      vmGuestType = "qemu"; # options are: vmware, spice, qemu, none
+      vmHost = false;
+      swapsize = 8; # Size of the swapfile in GB
+      #        useSops = false;
     };
 
+    # --- GLOBAL USER SETTINGS --- #
+    userSettings = {
+      username = "user";
+      name = "User";
+      dotfilesDir = "~/nixos-config";
+      emulator = "alacritty"; # options are: kitty, alacritty
+      browser = "brave";
+      prompt = "p10k"; # options are: starship, p10k, oh-my-posh
+    };
+
+    lib = nixpkgs.lib;
+    #pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+  in
+  {
+    nixosConfigurations = {
+      # A machine used for generic work environment
+      walrus = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/walrus
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+      # A machine used specifically for reverse engineering
+      raptor = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/raptor
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+      # A machine used specifically for hacking
+      hawk = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/hawk
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+      # A machine used specifically for servers without a graphical interface
+      snake = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/snake
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+      # A machine used specifically for development
+      dragon = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/dragon
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+      # A machine used specifically for LXC containers
+      lizard = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+            inherit systemSettings;
+            inherit userSettings;
+          };
+        modules = [
+          ./hosts/lizard
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit userSettings; };
+          }
+        ];
+      };
+    };
+  };
+
   inputs = {
-
-    ###### Packages URL-s ######
-
-    ### Base NixOS packages
+    ### Base NixOS packages (is used per default)
     nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-24.11";
+    };
+
+    ### Unstable NixOS packages in certain use cases (is only used when specifically indicated)
+    nixpkgs-unstable = {
       url = "nixpkgs/nixos-unstable";
+    };
+
+    ### Stylix for easy configuration of environment theme
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ### Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ### Plasma configuration
+    
     plasma-manager = {
       url = "github:nix-community/plasma-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -199,12 +178,6 @@
     ### Fixes vscode extensions hashes
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-    };
-
-    ### Stylix for easy configuration of environment
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ### SOPS is used for secrets management
