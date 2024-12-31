@@ -19,12 +19,13 @@
   ];
 
   # Bootloader.
-  boot.loader.grub.enable = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.grub.device = if (systemSettings.bootloader == "grub") then "/dev/vda" else "";
-  boot.loader.grub.useOSProber = if (systemSettings.bootloader == "grub") then true else false;
-  boot.loader.systemd-boot.enable = if (systemSettings.bootloader == "systemd") then true else false;
+  boot.loader.grub.enable = if (systemSettings.bootLoader == "grub") then true else false;
+  boot.loader.grub.device =
+    if (systemSettings.bootloader == "grub") then systemSettings.bootDevice else "";
+  boot.loader.grub.useOSProber = if (systemSettings.bootLoader == "grub") then true else false;
+  boot.loader.systemd-boot.enable = if (systemSettings.bootLoader == "systemd") then true else false;
   boot.loader.efi.canTouchEfiVariables =
-    if (systemSettings.bootloader == "systemd") then true else false;
+    if (systemSettings.bootLoader == "systemd") then true else false;
 
   swapDevices = [
     {
