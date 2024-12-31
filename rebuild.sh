@@ -4,9 +4,10 @@ if [ $# -gt 0 ]
 then
 	system=$1
 else
-  system=walrus
+  system=$(hostname)
 fi
-
+echo $system
+exit
 SCRIPT_DIR=~/nixos-config
 hms=`date +%Y.%m.%d-%H%M`
 branch=`(git branch 2>/dev/null | sed -n '/^\* / { s|^\* ||; p; }')`

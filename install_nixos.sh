@@ -35,58 +35,55 @@ fi
 
 cd $SCRIPT_DIR
 
+if [ -f './flake.nix' ]; then
+  echo "-----"
+  echo "flake.nix exists install script will exit"
+  echo "manually verify the content of flake.nix"
+  echo "and rebuild the system with"
+  echo "./rebuild.sh [system_name]"
+  exit
+fi
+
+cp ./flake_template.nix ./flake.nix
+
 read -rp "Which system to configure (walrus | snake | raptor | hawk | dragon | lizard ): [walrus] " system
 if [ -z "$system" ]; then
   system="walrus"
 fi
 
-echo "-----"
-echo "Configuration modified for $system system"
-sed -i "/^\s*system=/s/\(walrus\|lizard\|snake\|raptor\|hawk\|dragon\)/$system/" ./rebuild.sh
 
-read -rp "Special Graphics Driver (none | nvidia ):  [none] " graphics
+read -rp "Load Nvidia drivers (no | yes ):  [no] " graphics
 if [ -z "$graphics" ]; then
-  graphics="none"
+  graphics="no"
 fi
 
-if [ $graphics = "nvidia" ]; then
+if [ $graphics = "yes" ]; then
   echo "-----"
   echo "Configuration modified for Nvidia graphics drivers"
-  sed -i "/^\s*nvidia-drivers[[:space:]]*=[[:space:]]*/s/\(true\|false\)/true/" ./flake.nix
-else
-  echo "-----"
-  echo "Configuration modified for default graphics drivers" 
-  sed -i "/^\s*nvidia-drivers[[:space:]]*=[[:space:]]*/s/\(true\|false\)/false/" ./flake.nix
+  sed -i "/^\s*nvidiaDrivers[[:space:]]*=[[:space:]]*/s/\(true\|false\)/true/" ./flake.nix
 fi
 
 echo "-----"
-read -rp "Which bootloader was used during installation (grub | systemd): [grub] " bootloader
-if [ -z "$bootloader" ]; then
-  bootloader="grub"
-fi
-
-if [ $bootloader = "systemd" ]; then
-  echo "-----"
-  echo "Configuration modified for 'systemd' bootloader"
-  sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
+detect_systemd=`cat /etc/nixos/configuration.nix|sed -n "s/^.*systemd-boot.*\(true\|false\);$/\1/p"`
+if [ $detect_systemd = "true" ]; then
+  echo "Systemd was detected as bootloader"
+  sed -i "/^\s*bootLoader\s*=\s*/s/\"\(.*\)\"/\"systemd\"/" ./flake.nix
 else
-  echo "-----"
-  echo "Configuration modified for 'grub' bootloader"
-  sed -i "/^\s*bootloader\s*=\s*/s/\"\(.*\)\"/\"$bootloader\"/" ./flake.nix
+  detect_grub=`cat /etc/nixos/configuration.nix|sed -n "s/^.*boot.loader.grub.enable.*\(true\|false\);$/\1/p"`
+  if [ $detect_grub = "true" ]; then
+    echo "Grub was detected as bootloader"
+    detect_device=`cat /etc/nixos/configuration.nix|sed -n "s/^.*boot.loader.grub.device.*\"\(.*\)\";$/\1/p"`
+    echo "Grub boot device detected: $detect_device"
+    sed -i "/^\s*bootLoader\s*=\s*/s/\"\(.*\)\"/\"grub\"/" ./flake.nix
+    sed -i "/^\s*bootDevice\s*=\s*/s/\"\(.*\)\"/\"$detect_device\"/" ./flake.nix
+  fi
 fi
-
 echo "-----"
 echo "Generating Harware Configuration"
 sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-configuration.nix
 
 echo "-----"
-hms=`date +%Y.%m.%d-%H%M`
-branch=`(git branch 2>/dev/null | sed -n '/^\* / { s|^\* ||; p; }')`
-revision=`(git rev-parse HEAD)`
-nixversion=`nixos-version | sed 's/\(.*\) .*/\1_/'`
-
 echo "Setting Required Nix Settings Then Going To Install"
-NIX_CONFIG="experimental-features = nix-command flakes"
-NIXOS_LABEL="$nixversion$hms.$branch-${revision:0:7}" 
-sudo nixos-rebuild switch --impure --flake $SCRIPT_DIR#$system
+
+./rebuild.sh
 
