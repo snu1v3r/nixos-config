@@ -11,7 +11,7 @@
 
   stylix.base16Scheme = ../../../../theming/colors/tokyonight.yaml;
 
-  stylix.image = ../../../../theming/backgrounds/0001.jpg;
+  stylix.image = ../../../../theming/backgrounds/${systemSettings.hostname}.jpg;
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
   stylix.fonts = {
