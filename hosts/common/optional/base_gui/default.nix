@@ -29,6 +29,7 @@
     elisa
     kate
     khelpcenter
+    drkonqi
   ];
 
   # Configure keymap in X11

@@ -20,7 +20,7 @@
         bootLoader = "systemd";
         bootDevice = ""; # Only applicable when bootloader is grub
         vmGuestType = "none"; # options are: vmware, spice, qemu, none
-        vmHost = "qemu";
+        vmHost = "none";
         swapsize = 8; # Size of the swapfile in GB
         hostname = "walrus";
         #        useSops = false;

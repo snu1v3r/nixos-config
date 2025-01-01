@@ -10,6 +10,7 @@
     systemPackages = [
       pkgs.qemu
       pkgs.virt-manager
+      pkgs.virt-viewer
     ];
 
   };

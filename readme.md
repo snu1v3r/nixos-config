@@ -70,5 +70,17 @@ sudo nixos-rebuild switch --flake .#nameofconfiguration
 
 Benefit of this is that you can switch back to the old `flake.lock` file by switching back to that file in the *Git* repo. Effectively rolling back a package update.
 
+## Yubi key
+The current configuration also enables the option to use a *Yubi* key for authentication against `ssh` or `sudo`. After activation of the `flake.nix` the key needs to be added to the relevant user profile with the following command:
 
+```bash
+pamu2fcfg > ~/.config/Yubico/u2f_keys
+```
 
+For any additional backup keys for the same account execute the following command:
+
+```bash
+pamu2fcfg -n >> ~/.config/Yubico/u2f_keys
+```
+
+(The difference between the two commands is intentional and necessary)
