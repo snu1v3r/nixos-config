@@ -45,7 +45,7 @@
   # Enable networking
   networking = {
     networkmanager.enable = true;
-    #    hostName = systemSettings.hostname;
+    hostName = systemSettings.hostname;
   };
 
   # Set your time zone.
