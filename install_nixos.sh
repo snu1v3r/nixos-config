@@ -55,7 +55,9 @@ read -rp "Which system to configure (walrus | snake | raptor | hawk | dragon | l
 if [ -z "$system" ]; then
   system="walrus"
 fi
-
+echo "-----"
+echo "$system is set as the hostname for the targeted machine"
+sed -i "/^\s*hostname\s*=\s*/s/\"\(.*\)\"/\"$system\"/" ./flake.nix
 
 read -rp "Load Nvidia drivers (no | yes ):  [no] " graphics
 if [ -z "$graphics" ]; then
