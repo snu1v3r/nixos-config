@@ -16,7 +16,7 @@
         system = "x86_64-linux"; # system arch
         timezone = "Europe/Amsterdam";
         locale = "en_US.UTF-8";
-        nvidiaDrivers = true;
+        nvidiaDrivers = false;
         bootLoader = "systemd";
         bootDevice = ""; # Only applicable when bootloader is grub
         vmGuestType = "none"; # options are: vmware, spice, qemu, none
