@@ -92,5 +92,13 @@ sudo nixos-generate-config --show-hardware-config > $SCRIPT_DIR/system/hardware-
 echo "-----"
 echo "Setting Required Nix Settings Then Going To Install"
 
+## These additions are necessary to suppress errors of missing flake.nix and hardware-configuration.nix
+
+git add --intent-to-add flake.nix
+git add --intent-to-add flake.lock
+git add --intent-to-add system/hardware-configuration.nix
+git update-index --assume-unchanged flake.nix
+git update-index --assume-unchanged flake.lock
+git update-index --assume-unchanged system/hardware-configuration.nix
 ./rebuild.sh $system
 
