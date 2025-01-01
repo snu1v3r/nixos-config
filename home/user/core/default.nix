@@ -40,6 +40,7 @@
     ../common/zoxide
     ../common/zsh
     ../common/ripgrep
+    ../common/ssh
   ] ++ lib.optionals (userSettings.prompt == "starship") [ ../common/starship ];
 
   # Possibly temporary for SOPS. If to many lines this should be moved to the imports above
