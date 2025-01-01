@@ -1,3 +1,7 @@
 # Files below are either generated on install or installation specific
 
+flake.lock
+flake.nix
+system/hardware-configuration.nix
+
 

@@ -12,4 +12,4 @@ branch=`(git branch 2>/dev/null | sed -n '/^\* / { s|^\* ||; p; }')`
 revision=`(git rev-parse HEAD)`
 nixversion=`nixos-version | sed 's/\(.*\) .*/\1_/'`
 rm ~/.gtkrc-2.0
-sudo NIXOS_LABEL="$nixversion$hms.$branch-${revision:0:7}" nixos-rebuild switch --impure --flake $SCRIPT_DIR#$system
+sudo NIXOS_LABEL="$nixversion$hms.$branch-${revision:0:7}" nixos-rebuild switch --impure --flake path:$SCRIPT_DIR#$system
