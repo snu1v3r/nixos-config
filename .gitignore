@@ -4,4 +4,8 @@ flake.lock
 flake.nix
 system/hardware-configuration.nix
 
+# Ignore added for the Havoc_Nightmare sub-directory to inable package development while
+# not including the code into the repo
 
+packages/havoc/Havoc_Nightmare
+packages/havoc/result
