@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ pkgs, userSettings, ... }:
 {
   imports = [
     ../core
@@ -7,6 +7,11 @@
     ../common/plasma
     ../common/${userSettings.browser}
     ../common/${userSettings.emulator} # This selects the terminal emulator
+    ../common/syncthing
   ];
-}
 
+  home.packages = with pkgs; [
+    syncthingtray-qt6
+  ];
+
+}
