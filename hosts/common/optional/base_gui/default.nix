@@ -18,11 +18,23 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.xterm.enable = false;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.defaultSession = "plasma";
-  services.displayManager.sddm.enable = true;
+  # TODO: Move these settings to a seperate .nix file
 
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession =
+    if (systemSettings.desktop == "plasma") then "plasma" else "gnome";
+
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = if (systemSettings.desktop == "plasma") then true else false;
+  services.desktopManager.plasma6.enable =
+    if (systemSettings.desktop == "plasma") then true else false;
+
+  # Enable the GNOME Desktop Environment
+  services.xserver.displayManager.gdm.enable =
+    if (systemSettings.desktop == "gnome") then true else false;
+  services.xserver.desktopManager.gnome.enable =
+    if (systemSettings.desktop == "gnome") then true else false;
+
+  # TODO: Evaluate of this must be changed if gnome is uses as a desktop
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
@@ -31,6 +43,8 @@
     khelpcenter
     drkonqi
   ];
+
+  # TODO: See if we need a "uninstall" equivalent for gnome as a desktop
 
   # Configure keymap in X11
   services.xserver.xkb = {

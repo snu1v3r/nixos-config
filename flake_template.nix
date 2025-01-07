@@ -23,6 +23,7 @@
         vmHost = "none";
         swapsize = 8; # Size of the swapfile in GB
         hostname = "walrus";
+        desktop = "plasma"; # options are: plama, gnome
         #        useSops = false;
       };
 
