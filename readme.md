@@ -44,6 +44,20 @@ sudo nixos-rebuild switch --flake .#system
 ```
 
 
+## Nix Upkeep
+### Deleting old generations
+
+```bash
+nix-env --delete-generations <number>d
+```
+All generations older then `<number>` days will be deleted
+
+```bash
+nix-env --delete-generations +<number>
+```
+
+The last `number` generations will be kept
+
 
 ## Home-Manager
 ### Switching to *Home-Manager*
@@ -52,6 +66,7 @@ To switch to a *Home-Manager* configuration assuming a previously enabled *Flake
 ```
 home-manager switch --flake .#nameofconfiguration
 ```
+
 
 
 ## Flakes
