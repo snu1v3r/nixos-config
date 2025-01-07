@@ -35,11 +35,11 @@ in
     historySubstringSearch.enable = true;
     sessionVariables = {
 
-# The four lines below are disabled because of the more robust solution with batman (see ../bat/default.nix)
-#      MANPAGER = (
-#        if (config.programs.bat.enable == true) then "sh -c 'col -bx | bat -l man -p'" else "less"
-#      );
-#      MANROFFOPT = (if (config.programs.bat.enable == true) then "-c" else "");
+      # The four lines below are disabled because of the more robust solution with batman (see ../bat/default.nix)
+      #      MANPAGER = (
+      #        if (config.programs.bat.enable == true) then "sh -c 'col -bx | bat -l man -p'" else "less"
+      #      );
+      #      MANROFFOPT = (if (config.programs.bat.enable == true) then "-c" else "");
       FZF_DEFAULT_OPTS = "--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8,selected-bg:#45475a --multi";
       EDITOR = "vi";
     };
