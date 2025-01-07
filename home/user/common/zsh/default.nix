@@ -22,6 +22,7 @@ let
     svi = "sudoedit";
     man = "batman";
     diff = "batdiff";
+    grep = "rg";
   };
 in
 {
