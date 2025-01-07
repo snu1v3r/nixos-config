@@ -2,6 +2,7 @@
   pkgs,
   systemSettings,
   lib,
+  pkgs-unstable,
   ...
 }:
 
@@ -23,8 +24,38 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  ];
+
+  environment.systemPackages =
+    (with pkgs; [
+      # These packages are added systemwide, because they do not require user specific configuration and need
+      # to be available for both the user and the root
+      nmap
+      wordlists
+      python312Packages.impacket
+      bloodhound
+      neo4j # start with the `sudo NEO4J_HOME=/home/user/.neo4j neo4j start` command to mitigate issue with non-writable application folder
+      netcat-openbsd
+
+      # website directory and vhost fuzzing
+      gobuster
+      feroxbuster
+      netexec
+      wfuzz
+      thc-hydra
+
+      # password cracking
+      hashcat
+      john
+      havoc-client
+      havoc-server
+    ])
+    ++ (with pkgs-unstable; [
+
+      metasploit # metasploit in the stable branch appears to be broken
+    ]);
+  nixpkgs.config.packageOverrides = pkgs: {
+    havoc-client = pkgs.libsForQt5.callPackage ../../packages/havoc/client.nix { };
+    havoc-server = pkgs.callPackage ../../packages/havoc/server.nix { };
+  };
 
 }
