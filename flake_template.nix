@@ -6,6 +6,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixpkgs-unstable,
       plasma-manager,
       stylix,
       ...
@@ -36,9 +37,9 @@
         browser = "brave";
         prompt = "p10k"; # options are: starship, p10k, oh-my-posh
       };
-
+      pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+      pkgs-unstable = nixpkgs.legacyPackages.${systemSettings.system};
     in
-    #pkgs = nixpkgs.legacyPackages.${systemSettings.system};
     {
       nixosConfigurations = {
         # A machine used for generic work environment
@@ -47,6 +48,7 @@
             inherit inputs;
             inherit systemSettings;
             inherit userSettings;
+            inherit pkgs-unstable;
           };
           modules = [
             ./hosts/${systemSettings.hostname}
@@ -73,7 +75,7 @@
 
     ### Unstable NixOS packages in certain use cases (is only used when specifically indicated)
     nixpkgs-unstable = {
-      url = "nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     ### Stylix for easy configuration of environment theme
