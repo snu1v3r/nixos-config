@@ -50,6 +50,7 @@
     gcc
     gparted
     keepassxc
+    openvpn
   ];
 
 }

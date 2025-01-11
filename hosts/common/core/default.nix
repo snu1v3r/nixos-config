@@ -27,12 +27,12 @@
   boot.loader.efi.canTouchEfiVariables =
     if (systemSettings.bootLoader == "systemd") then true else false;
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = systemSettings.swapsize * 1024; # 8 GB swapfile
-    }
-  ];
+  #  swapDevices = [
+  #  {
+  #    device = "/swapfile";
+  #    size = systemSettings.swapsize * 1024; # 8 GB swapfile
+  #  }
+  #];
 
   nix.settings.allowed-users = [
     "@wheel"
@@ -88,7 +88,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
   programs = {
-    firefox.enable = true;
+    firefox.enable = false;
     zsh.enable = true;
 
   };
@@ -121,7 +121,10 @@
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;
+
   # };
+
+  programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 
