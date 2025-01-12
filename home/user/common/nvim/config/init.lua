@@ -951,6 +951,9 @@ require("lazy").setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    "voldikss/vim-floaterm"
+  },
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",

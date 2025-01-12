@@ -29,12 +29,17 @@
     (with pkgs; [
       # These packages are added systemwide, because they do not require user specific configuration and need
       # to be available for both the user and the root
+
+      # Generic Tools
+      python3Full
       nmap
       wordlists
       python312Packages.impacket
       bloodhound
       neo4j # start with the `sudo NEO4J_HOME=/home/user/.neo4j neo4j start` command to mitigate issue with non-writable application folder
       netcat-openbsd
+      openvpn
+      remmina
 
       # website directory and vhost fuzzing
       gobuster
